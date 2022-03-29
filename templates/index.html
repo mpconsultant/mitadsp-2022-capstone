@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+      
+
+       <!-- css -->
+       <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}" />
+
+
+</head>
+<body>
+  <div id="image" style="background:url(/static/images/music.jpg) center / cover no-repeat fixed;"></div> 
+
+  <h2><mark>MIT-ADSP-2022 Capstone Project:-: Music Recommendations System</mark></h2>
+
+  <form name="passdata" action="/about" method="post">
+        <div>
+    <label for="quantity"> Song Id[1-4990] :</label>
+    <input type="number" id="quantity" name="number" min="1" max="4999"1>
+    <label for="recommend">Recommendations[1-40]</label>
+    <input type="number" id="recommend" name="recommend" min="1" max="40">
+     
+    <input type="submit">
+    
+     </div>
+     </form>
+
+{% if prediction_text %}
+ <style>
+table, th, td {
+  border:4px solid green;
+}
+</style>
+<body>
+
+<h2>Music Recommendations Results</h2>
+
+<table style="width:100%">
+  <colgroup>
+    <col span="1" style="background-color: rgba(218, 17, 17, 0.473)">
+  </colgroup>
+  <tr>
+  <th>Songs List</th>
+ 
+  </tr>
+  <tr>
+  <td>{{ prediction_text }}</td>
+ 
+  </tr>
+{% endif %} 
+
+</div>
+</div>
+ </body>
+</html>
