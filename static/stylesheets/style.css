@@ -2,7 +2,7 @@ body {
 	background-image: url(/static/images/music.jpg);
     background-size: cover;
 	color:rgb(255, 255, 255);
-	text-align: top;
+	text-align: center;
 	padding-top:5px;
 }
 
@@ -16,14 +16,14 @@ h1 {
 h2 {
 	padding-top:150px;
 	color:white;
-	text-align:center;
+	text-align:top;
 	font-size: 50px;
 }
 
 h3 {
 	padding-top:150px;
 	color:white;
-	text-align:center;
+	text-align:top;
 	font-size: 50px;
 }
 
