@@ -46,3 +46,18 @@ center {
 	margin-right: auto;
   }
 
+
+btn {
+	background-color: dodgerblue;
+	color: white;
+	padding: 15px 20px;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 0.9;
+  }
+  
+btn:hover {
+	opacity:3;
+  }
+

@@ -12,17 +12,27 @@
 <body>
   <div id="image" style="background:url(/static/images/music.jpg) center / cover no-repeat fixed;"></div> 
 
-  <h3><mark>MIT-ADSP-2022 - Recommendations Systems</mark></h3>
+  <h3>MIT-ADSP-2022 - Recommendations Systems</h3>
    
 
   <form name="passdata" action="/about" method="post">
         <div>
     <table class="center">
      <tr>
+     <th>
+      <h3><mark>Songs Recommendations</mark></h3>
+     </th>
+     <th>
+
+      <h3><mark>Books Recommendations</mark></h3>
+
+     </th>
+     </tr>
+     <tr>
         <td>
     
             
-           <label for="quantity"> Song Id[1-4990] :</label>
+           <label for="quantity"> Song Id[1-4999] :</label>
            <input type="number" id="quantity" name="number" min="1" max="4999"1>
            <label for="recommend">Recommendations[1-40]</label>
            <input type="number" id="recommend" name="recommend" min="1" max="40">
@@ -31,7 +41,7 @@
        <td>
 
           
-          <label for="books">Choose a Book:</label>
+          <label for="books">Select a Book:</label>
           <select name="books" id="books">
           <option value=" " </option>
           <option value="Harry Potter and the Half-Blood Prince (Harry Potter  #6)">Harry Potter and the Half-Blood Prince (Harry Potter  #6)</option>
@@ -57,9 +67,9 @@
     </table>
     </select>
     
-    <center></center><input type="submit"></div><center>
+    <center><button type="submit" class="btn">Get  Recommendations</button><center>
     
-     </div>
+     
      </form>
 
 {% if prediction_text %}
