@@ -2,7 +2,7 @@ body {
 	background-image: url(/static/images/music.jpg);
     background-size: cover;
 	color:rgb(255, 255, 255);
-	text-align: center;
+	text-align: top;
 	padding-top:5px;
 }
 
