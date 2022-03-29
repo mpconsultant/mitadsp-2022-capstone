@@ -12,16 +12,52 @@
 <body>
   <div id="image" style="background:url(/static/images/music.jpg) center / cover no-repeat fixed;"></div> 
 
-  <h2><mark>MIT-ADSP-2022 Capstone Project:-: Music Recommendations System</mark></h2>
+  <h3><mark>MIT-ADSP-2022 Capstone Project - Recommendations Systems</mark></h3>
+   
 
   <form name="passdata" action="/about" method="post">
         <div>
-    <label for="quantity"> Song Id[1-4990] :</label>
-    <input type="number" id="quantity" name="number" min="1" max="4999"1>
-    <label for="recommend">Recommendations[1-40]</label>
-    <input type="number" id="recommend" name="recommend" min="1" max="40">
+    <table>
+     <tr>
+        <td>
+    
+            
+           <label for="quantity"> Song Id[1-4990] :</label>
+           <input type="number" id="quantity" name="number" min="1" max="4999"1>
+           <label for="recommend">Recommendations[1-40]</label>
+           <input type="number" id="recommend" name="recommend" min="1" max="40">
+       </td>
      
-    <input type="submit">
+       <td>
+
+          
+          <label for="books">Choose a Book:</label>
+          <select name="books" id="books">
+          <option value=" " </option>
+          <option value="Harry Potter and the Half-Blood Prince (Harry Potter  #6)">Harry Potter and the Half-Blood Prince (Harry Potter  #6)</option>
+          <option value="Heirs of General Practice">Heirs of General Practice</option>
+          <option value="A Short History of Nearly Everything">A Short History of Nearly Everything</option>
+          <option value="Bill Bryson's African Diary">Bill Bryson's African Diary</option>
+          <option value="Uncommon Carriers">Uncommon Carriers</option>
+          <option value="Dinner with Anna Karenina">Dinner with Anna Karenina</option>
+          <option value="Wrinkles in Time">Wrinkles in Time</option>
+          <option value="The Natural">The Natural</option>
+          <option value="Digging to America">Digging to America</option>
+          <option value="Naked Pictures of Famous People">Naked Pictures of Famous People</option>
+          <option value="Digging to America">Digging to America</option>
+          <option value="Living to Tell the Tale">Living to Tell the Tale</option>
+          <option value="Of Mice and Men">Of Mice and Men</option>
+          <option value="The Westing Game">The Westing Game</option>
+          <option value="The Egypt Game">The Egypt Game</option>
+          <option value="Memoirs of a Geisha"> Memoirs of a Geisha</option>
+
+
+       </td>
+     </tr>
+    </table>
+    </select>
+    
+    <center></center><input type="submit"></div><center>
     
      </div>
      </form>
@@ -33,15 +69,14 @@ table, th, td {
 }
 </style>
 <body>
-
-<h2>Music Recommendations Results</h2>
+ 
 
 <table style="width:100%">
   <colgroup>
-    <col span="1" style="background-color: rgba(218, 17, 17, 0.473)">
+    <col span="1" style="background-color: rgba(2, 1, 1, 0.788)">
   </colgroup>
   <tr>
-  <th>Songs List</th>
+  <th>Songs / Books Recommendation List </th>
  
   </tr>
   <tr>

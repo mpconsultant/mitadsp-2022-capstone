@@ -1,10 +1,15 @@
 
+from multiprocessing.dummy import Namespace
+from urllib.request import Request
 import pandas as pd
 from flask import Flask, render_template,request
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn import neighbors
+from sklearn.model_selection import train_test_split
 import os
 import warnings
+from sklearn.preprocessing import MinMaxScaler
 warnings.simplefilter(action = 'ignore', category=FutureWarning)
 warnings.filterwarnings('ignore')
 def ignore_warn(*args, **kwargs):
@@ -32,6 +37,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from typing import List, Dict
 
+
+df = pd.read_csv('books.csv',error_bad_lines = False)
 songs = pd.read_csv('songdata.csv')
 songs = songs.sample(n=5000).drop('link', axis=1).reset_index(drop=True)
 songs['text'] = songs['text'].str.replace(r'\n', '')
@@ -58,13 +65,13 @@ def print_message(song, recom_song):
         for i in range(rec_items):
             
             st=str(i+1)  + ":  " + f"{recom_song[i][1]} by {recom_song[i][2]} with {round(recom_song[i][0], 3)} similarity score"
-            
+             
             rec_list.append(st)
             rec_list.append('\n')
            
         return rec_list
     
-def recommend(num_loc,num_songs):
+def recommend_music(num_loc,num_songs):
        
          
 
@@ -88,12 +95,33 @@ def recommend(num_loc,num_songs):
         recom_song = similarities[song][:number_songs]
        
         rec_list=print_message(song=song, recom_song=recom_song)
-
         stringo = ",".join(rec_list)
-
         stringnl =stringo.replace(',','\n')
-
         return stringnl
+
+    
+def recommend_books(bookid):
+   
+    df2 = df.copy()
+    features = pd.concat([df2['average_rating'], 
+                      df2['ratings_count']], axis=1)
+
+    min_max_scaler = MinMaxScaler()
+    features = min_max_scaler.fit_transform(features)  
+    model = neighbors.NearestNeighbors(n_neighbors=6, algorithm='ball_tree')
+    model.fit(features)
+    dist, idlist = model.kneighbors(features)  
+    book_list_name = []
+    book_id = df2[df2['title'] == bookid].index
+    book_id = book_id[0]
+    i=1
+    for newid in idlist[book_id]:
+        book_list_name.append(" : " + str(i) +" : ")
+        book_list_name.append(df2.loc[newid].title) 
+        i+=1
+    stringo = ",".join(book_list_name)
+    stringnl =stringo.replace(',','')
+    return stringnl
 
 app = Flask(__name__)
 @app.route('/')
@@ -105,9 +133,29 @@ def getvalue():
     
     number   = request.form['number']
     recommd = request.form['recommend']
-    df=recommend(number,recommd)
+    books   = request.form['books']
+   
+
     
+    if (books != " "):
+       df=recommend_books(books)
+       return render_template('index.html',prediction_text="{}".format(df))
+
+
+    if (number  != " "): 
+       if (recommd == "" ):
+          df="Warning ====> Enter number of recommendations "
+          return render_template('index.html',prediction_text="{}".format(df))
+
+    if (recommd  != " "):
+       if (number == "" ):
+          df="Warning ====> Enter musicid  "
+          return render_template('index.html',prediction_text="{}".format(df))
+     
+   
+     
     
+    df=recommend_music(number,recommd)
     return render_template('index.html',prediction_text="{}".format(df))
 
 if __name__ == '__main__':
