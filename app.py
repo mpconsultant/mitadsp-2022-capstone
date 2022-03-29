@@ -144,17 +144,15 @@ def getvalue():
 
     if (number  != " "): 
        if (recommd == "" ):
-          df="Warning ====> Enter number of recommendations "
+          df="Warning ====> Select Ssong Id and number of recommendations "
           return render_template('index.html',prediction_text="{}".format(df))
 
     if (recommd  != " "):
        if (number == "" ):
-          df="Warning ====> Enter musicid  "
+          df=df="Warning ====> Select Ssong Id and number of recommendations "
           return render_template('index.html',prediction_text="{}".format(df))
      
    
-     
-    
     df=recommend_music(number,recommd)
     return render_template('index.html',prediction_text="{}".format(df))
 
