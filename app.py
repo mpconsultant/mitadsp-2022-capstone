@@ -40,7 +40,7 @@ from typing import List, Dict
 
 df = pd.read_csv('books.csv',error_bad_lines = False)
 songs = pd.read_csv('songdata.csv')
-songs = songs.sample(n=10000).drop('link', axis=1).reset_index(drop=True)
+songs = songs.sample(n=5000).drop('link', axis=1).reset_index(drop=True)
 songs['text'] = songs['text'].str.replace(r'\n', '')
 
 tfidf = TfidfVectorizer(analyzer='word', stop_words='english')
