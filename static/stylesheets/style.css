@@ -23,7 +23,7 @@ h2 {
 h3 { padding-top:150px;
 	color:white;
 	text-align:top;
-	font-size: 25px;
+	font-size: 35px;
 }
 
 p1{
@@ -39,4 +39,10 @@ form {
 	padding-top:50px;
 	width:100%;
 }
+
+
+center {
+	margin-left: auto;
+	margin-right: auto;
+  }
 
