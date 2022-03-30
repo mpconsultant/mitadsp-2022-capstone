@@ -108,7 +108,7 @@ def recommend_books(bookid):
 
     min_max_scaler = MinMaxScaler()
     features = min_max_scaler.fit_transform(features)  
-    model = neighbors.NearestNeighbors(n_neighbors=6, algorithm='ball_tree')
+    model = neighbors.NearestNeighbors(n_neighbors=10, algorithm='ball_tree')
     model.fit(features)
     dist, idlist = model.kneighbors(features)  
     book_list_name = []
