@@ -39,6 +39,9 @@ from typing import List, Dict
 
 
 df = pd.read_csv('books.csv',error_bad_lines = False)
+rating = pd.read_csv('ratings.csv')
+dm= pd.read_csv('movies.csv')
+dm.title
 songs = pd.read_csv('songdata.csv')
 songs = songs.sample(n=5000).drop('link', axis=1).reset_index(drop=True)
 songs['text'] = songs['text'].str.replace(r'\n', '')
@@ -123,6 +126,33 @@ def recommend_books(bookid):
     stringnl =stringo.replace(',','')
     return stringnl
 
+average_rating = rating.groupby('movieId').mean()['rating']
+count_rating = rating.groupby('movieId').count()['rating']
+final_rating = pd.DataFrame({'avg_rating':average_rating, 'rating_count':count_rating})
+
+def top_n_movies(data, n, min_interaction):
+     
+    recommendations = data[data['rating_count'] > min_interaction]
+    print("recommendations  ",recommendations)
+    recommendations = recommendations.sort_values(by='avg_rating', ascending=False)
+    
+    return recommendations.index[:n]
+
+def get_top_n_movies(num,interaction):
+    gist = list(top_n_movies(final_rating, int(num), int(interaction)))    
+    recommended_movies = []
+    datau = []
+    for i in gist:
+        datu=dm.loc[dm['movieId'] == i] 
+    
+        recommended_movies.append(list(datu.title+ ": "))
+    
+    listToStr = ' '.join([str(elem) for elem in recommended_movies])
+    return listToStr
+        
+        
+        
+        
 app = Flask(__name__)
 @app.route('/')
 def index():
@@ -134,27 +164,47 @@ def getvalue():
     number   = request.form['number']
     recommd = request.form['recommend']
     books   = request.form['books']
-   
-
+    numovie  = request.form['numovie']
+    interaction  = request.form['interaction']
+    print("number is " ,number)
     
     if (books != " "):
-       df=recommend_books(books)
-       return render_template('index.html',prediction_text="{}".format(df))
+        df=recommend_books(books)
+        return render_template('index.html',prediction_text="{}".format(df))
 
+    
+    if (number  !=""): 
+        if (recommd == "" ):
+                df="Warning ====> mola Select Song Id and number of recommendations Or select a book 1"
+                return render_template('index.html',prediction_text="{}".format(df))
 
-    if (number  != " "): 
-       if (recommd == "" ):
-          df="Warning ====> Select Song Id and number of recommendations Or select a book "
-          return render_template('index.html',prediction_text="{}".format(df))
-
-    if (recommd  != " "):
-       if (number == "" ):
-          df=df="Warning ====> Select Song Id and number of recommendationsOr selct a Book"
-          return render_template('index.html',prediction_text="{}".format(df))
+    if (recommd  != ""):
+         if (number == "" ):
+            df=df="Warning ====> bola Select Song Id and number of recommendations Or select a Book 2"
+            return render_template('index.html',prediction_text="{}".format(df))
      
+        
+    if (numovie  != ""): 
+        if (interaction == "" ):
+            df="Warning ====> Select number of movies  and number of interactions  "
+            return render_template('index.html',prediction_text="{}".format(df))
+
+    if (interaction  != ""):
+        if (numovie == "" ):
+            df=df="Warning ====> Select number of movies  and number of interactions "
+            return render_template('index.html',prediction_text="{}".format(df))
    
-    df=recommend_music(number,recommd)
-    return render_template('index.html',prediction_text="{}".format(df))
+    if (number  != ""):
+         if (recommd  != ""):
+            df=recommend_music(number,recommd)
+            return render_template('index.html',prediction_text="{}".format(df))
+        
+    if (numovie != ""):
+         if (interaction  != "" ):
+            df=get_top_n_movies(numovie,interaction)
+            return render_template('index.html',prediction_text="{}".format(df))
+        
+        
 
 if __name__ == '__main__':
     app.run(debug=False)

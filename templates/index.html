@@ -12,7 +12,7 @@
 <body>
   <div id="image" style="background:url(/static/images/music.jpg) center / cover no-repeat fixed;"></div> 
 
-  <h3><mark>MIT-ADSP-2022 - Recommendations Systems</mark></h3>
+  <h4><mark>MIT-ADSP-2022 - Recommendations Systems</mark></h4>
    
 
   <form name="passdata" action="/about" method="post">
@@ -25,6 +25,12 @@
      <th>
 
       <h4>Books Recommendations</h4>
+
+     </th>
+
+     <th>
+      
+      <h4>Movies Rank Based Recommendations</h4> 
 
      </th>
      </tr>
@@ -63,6 +69,16 @@
 
 
        </td>
+       <td>
+    
+            
+         <label for="numovie"># of movies :</label>
+         <input type="number" id="numovie" name="numovie" min="1" max="100"1>
+         <label for="interaction"># of interaction</label>
+         <input type="number" id="interaction" name="interaction" min="100" max="1000">
+    </td>
+
+         
      </tr>
     </table>
     </select>
@@ -83,10 +99,10 @@ table, th, td {
 
 <table style="width:100%">
   <colgroup>
-    <col span="1" style="background-color: rgba(2, 1, 1, 0.788)">
+    <col span="1" style="background-color: rgba(126, 6, 6, 0.788)">
   </colgroup>
   <tr>
-  <th>Songs / Books Recommendation List </th>
+  <th>Songs / Books / Movies Recommendation List </th>
  
   </tr>
   <tr>
